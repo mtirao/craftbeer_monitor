@@ -1,18 +1,19 @@
-%%%-------------------------------------------------------------------
-%% @doc craftbeer_monitor public API
-%% @end
-%%%-------------------------------------------------------------------
-
 -module(craftbeer_monitor_app).
-
 -behaviour(application).
 
--export([start/2, stop/1]).
+-export([start/2]).
+-export([stop/1]).
 
-start(_StartType, _StartArgs) ->
-    craftbeer_monitor_sup:start_link().
+start(_Type, _Args) ->
+	Dispatch = cowboy_router:compile([
+		{'_', [ {"/api/v1/applications", applications_handler, []} ] }
+    ]),
+    {ok, _} = cowboy:start_clear(my_http_listener,
+        [{port, 8080}],
+        #{env => #{dispatch => Dispatch}}
+	),
+
+	craftbeer_monitor_sup:start_link().
 
 stop(_State) ->
-    ok.
-
-%% internal functions
+	ok.
