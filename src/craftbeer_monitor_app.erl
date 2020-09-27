@@ -5,11 +5,12 @@
 -export([stop/1]).
 
 start(_Type, _Args) ->
+	
 	Dispatch = cowboy_router:compile([
-		{'_', [ {"/api/v1/applications", applications_handler, []} ] }
+		{'_', [ {"/api/v1/applications", monitor_handler, []} ] }
     ]),
     {ok, _} = cowboy:start_clear(my_http_listener,
-        [{port, 8080}],
+        [{port, 8081}],
         #{env => #{dispatch => Dispatch}}
 	),
 
