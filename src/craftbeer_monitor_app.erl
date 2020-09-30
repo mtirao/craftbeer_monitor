@@ -14,7 +14,13 @@ start(_Type, _Args) ->
         #{env => #{dispatch => Dispatch}}
 	),
 
+	%spawn(fun() -> server(ConnPid, EventPid) end),
+
 	craftbeer_monitor_sup:start_link().
 
 stop(_State) ->
 	ok.
+
+
+	
+	

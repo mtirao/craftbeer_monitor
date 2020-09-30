@@ -8,5 +8,7 @@ start_link() ->
 	supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
-	Procs = [],
+	Child =#{id => temp_monitor,
+			start => {temp_monitor, start_link, []}},
+	Procs = [Child],
 	{ok, {{one_for_one, 1, 5}, Procs}}.
