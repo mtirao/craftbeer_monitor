@@ -1,3 +1,6 @@
--name craftbeer_monitor@127.0.0.1
--setcookie craftbeer_monitor
--heart
+-sname craftbeer_monitor
+
+-setcookie craftbeer_monitor_cookie
+
++K true
++A30

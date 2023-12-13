@@ -5,7 +5,12 @@
 -export([stop/1]).
 
 start(_Type, _Args) ->
-	
+	application:start(sasl),
+    application:start(crypto),
+    application:start(cowlib),
+    application:start(ranch),
+    application:start(cowboy),
+    application:start(pgsql),
 	Dispatch = cowboy_router:compile([
 		{'_', [ {"/api/v1/applications", monitor_handler, []} ] }
     ]),

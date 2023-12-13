@@ -17,7 +17,7 @@ server(ConnPid, EventPid) ->
                 no_data;
         {response, nofin, _, _} ->
             {ok, Body} = gun:await_body(ConnPid, StreamRef),
-            Temperature = jiffy:decode(Body, [return_maps]),
+            Temperature = jiffy_v:decode(Body, [return_maps]),
             event(EventPid, Temperature),
             io:format("~s~n", [Body]),
             no_data;
